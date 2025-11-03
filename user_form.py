@@ -176,7 +176,7 @@ CANONICAL_HEADERS = [
 # Helpers: GSpread client (secrets fallback)
 # ------------------------------
 def get_gspread_client():
-    info = json.loads(st.secrets["gcp_service_account"])
+    info = st.secrets["gcp_service_account"]  # Already a dict
     creds = Credentials.from_service_account_info(
         info, 
         scopes=[
