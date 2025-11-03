@@ -176,17 +176,34 @@ CANONICAL_HEADERS = [
 # Helpers: GSpread client (secrets fallback)
 # ------------------------------
 def get_gspread_client():
-    # prefer st.secrets (Streamlit Cloud)
+    import json
+    import streamlit as st
+    from google.oauth2.service_account import Credentials
+    import gspread
+
+    # Prefer Streamlit secrets (Streamlit Cloud)
     if "gcp_service_account" in st.secrets:
         info = st.secrets["gcp_service_account"]
         if isinstance(info, str):
             info = json.loads(info)
-        creds = Credentials.from_service_account_info(info, scopes=["https://www.googleapis.com/auth/spreadsheets"])
+
+        # ✅ FIX: replace escaped newlines with real newlines
+        if "private_key" in info:
+            info["private_key"] = info["private_key"].replace("\\n", "\n")
+
+        creds = Credentials.from_service_account_info(
+            info, scopes=["https://www.googleapis.com/auth/spreadsheets"]
+        )
+
     else:
-        # local fallback filename - change if needed
+        # local fallback
         JSON_KEY_FILE = "last-f1197-42b004ea88d5 (1).json"
-        creds = Credentials.from_service_account_file(JSON_KEY_FILE, scopes=["https://www.googleapis.com/auth/spreadsheets"])
+        creds = Credentials.from_service_account_file(
+            JSON_KEY_FILE, scopes=["https://www.googleapis.com/auth/spreadsheets"]
+        )
+
     return gspread.authorize(creds)
+
 
 @st.cache_resource
 def open_sheet():
