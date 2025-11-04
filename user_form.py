@@ -226,7 +226,7 @@ def append_row_with_retry(sheet, row, retries=3, backoff=0.4): # sheet,
     raise last_exc
 
 # Set your global closing time (UTC or local)
-CLOSING_TIME = datetime.datetime(2025, 11, 5, 23, 59)  # 
+CLOSING_TIME = datetime.datetime(2026, 11, 5, 23, 59)  # 
 
 # Compute remaining time
 now = datetime.datetime.now()
@@ -313,24 +313,24 @@ if remaining.total_seconds() > 0:
             st.markdown("---")
         
             st.subheader("💻 Tech Domain")
-            tech_areas = st.multiselect("💡 Which areas interest you?", ["Robotics","AI/ML","Security","Front-End","Back-End","Mobile","Game Dev","UI/UX"])
-            tech_languages = st.multiselect("💻 Programming languages ", ["Python","C/C++","Java","JavaScript /TypeScript","C#","Dart (Flutter)","PHP","SQL","None yet, but I’m learning"])
+            tech_areas = st.multiselect("**💡 Which areas interest you?**", ["Robotics","AI/ML","Security","Front-End","Back-End","Mobile","Game Dev","UI/UX"])
+            tech_languages = st.multiselect("**💻 Programming languages**", ["Python","C/C++","Java","JavaScript /TypeScript","C#","Dart (Flutter)","PHP","SQL","None yet, but I’m learning"])
             tech_project_desc = st.multiselect("🧠 Describe a project / competition / experience", ["Participated in national or international competitions","Designed (alone or in a team) the UI/UX of an app or website","Built a fully functional robot","Developed a responsive website","Trained an AI model","Created a game","Modeled or implemented a security system","Developed a fully functional mobile application","Created an original project or innovative solution", "Modified or improved existing ideas or systems", "Conduct practical experiments or hands-on technical tests occasionally","Not yet, but excited to start"])
-            tech_portfolio = st.selectbox("🌐 Do you have a portfolio?", ["yes","no"])
+            tech_portfolio = st.selectbox("**🌐 Do you have a portfolio?**", ["yes","no"])
             tech_tools = st.multiselect("🧰 Tools", ["Arduino / ESP32 / Raspberry Pi /sensors","Unity","Figma","Java","Git/GitHub","Linux","Database(SQL / MongoDB)","Docker/VM","VS Code / IntelliJ / PyCharm","APIs / Postman","Cloud Services (AWS, Firebase, etc.)","Flutter","No, but I’d like to try"])
-            tech_self_rate = st.slider("Rate yourself (0–5)", 0, 5, 3)
+            tech_self_rate = st.slider("**Rate yourself (0–5)**", 0, 5, 3)
 
             st.markdown("---")
             st.subheader("🎨 Design & Media Section")
-            media_areas = st.multiselect("💡 Which design areas?", ["Graphic Design","UI UX","Illustration","Motion Graphics","3D Modeling"]) # 2 pts per selected (max 5) , max = 10 
-            media_tools = st.multiselect("🎨 Which tools or software do you use?", ["Adobe Illustrator","Photoshop","Figma","Canva","InDesign","Other","None, but I’d like to learn"]) # 2	Tools/software used	Multiple choice	2 pts per selected (max 5)	10 , max = 10
-            media_freelance_exp = st.selectbox("Have you worked as a freelancer or with a company before?", ["Yes","No","Not yet, but I’d like to"]) #Yes 10 / Want 3/ No 0
+            media_areas = st.multiselect("**💡 Which design areas?**", ["Graphic Design","UI UX","Illustration","Motion Graphics","3D Modeling"]) # 2 pts per selected (max 5) , max = 10 
+            media_tools = st.multiselect("**🎨 Which tools or software do you use?**", ["Adobe Illustrator","Photoshop","Figma","Canva","InDesign","Other","None, but I’d like to learn"]) # 2	Tools/software used	Multiple choice	2 pts per selected (max 5)	10 , max = 10
+            media_freelance_exp = st.selectbox("**Have you worked as a freelancer or with a company before?**", ["Yes","No","Not yet, but I’d like to"]) #Yes 10 / Want 3/ No 0
             media_tasks = st.multiselect("Which media tasks do you enjoy most? ", ["Photography","Videography","Video Editing","Script / Caption Writing","Social Media Management","Voice Recording / Narration","Acting"])# 3 pts per selected (max 6) , max = 18
-            media_editing_tools = st.multiselect("Which tools do you use for editing?", ["Adobe Premiere Pro","CapCut","DaVinci Resolve","Adobe Audition","Audacity","None"]) # 2 pts per selected (max 6)
-            media_deep_tools = st.multiselect("Have you ever explored or owned any of these tools/resources?", ["Camera","Smartphone with good camera","Microphone","Lighting Setup","Tripod / Stabilizer","SD cards / External storage","None"]) # 2 pt per selected (max 6)
-            media_portfolio = st.selectbox("🌐 Do you have a portfolio ?", ["yes","no"],key=1)# 0
+            media_editing_tools = st.multiselect("**Which tools do you use for editing?**", ["Adobe Premiere Pro","CapCut","DaVinci Resolve","Adobe Audition","Audacity","None"]) # 2 pts per selected (max 6)
+            media_deep_tools = st.multiselect("**Have you ever explored or owned any of these tools/resources?**", ["Camera","Smartphone with good camera","Microphone","Lighting Setup","Tripod / Stabilizer","SD cards / External storage","None"]) # 2 pt per selected (max 6)
+            media_portfolio = st.selectbox("**🌐 Do you have a portfolio ?**", ["yes","no"],key=1)# 0
             media_project_desc = st.multiselect(
-                "🧠 Describe a media-related project or experience",
+                "**🧠 Describe a media-related project or experience**",
                 [
                     # -1 items
                     "Participated in a design competition -1",
@@ -345,31 +345,31 @@ if remaining.total_seconds() > 0:
                     "Good at voice acting or acting -2"
                 ]
             )
-            media_designrate = st.slider("Rate experience (0–5)",0,5,3) # 12 / 24 / 36 / 48 / 510
+            media_designrate = st.slider("**Rate experience (0–5)**",0,5,3) # 12 / 24 / 36 / 48 / 510
             media_editingrate = st.slider("Rate your editing skills (0–5)",0,5,3) # 11 / 22 / 33 / 45 / 57
 
             st.markdown("---")
             st.subheader("💼 Sponsoring Domain")
-            sponsor_areas = st.multiselect("💡 Which type of activities interest you? ", ["Searching for sponsors","Writing emails","Negotiation & Partnerships","Marketing and promotion","Communication and network","Other"]) # 1	Activities of interest	Multiple choice	8 pts per selected (max 5)	40
-            sponsor_exp = st.multiselect("Do you have prior experience in any of these?", ["Contacting or negotiating with sponsors","Writing partnership proposals", "Managing event logistics (venue, materials, setup…)", "Communicating with partners or companies", "Handling budgets or sponsorship funds", "None"]) # 2ptc per choice (max 5) , if none = o
-            sponsor_event_participation = st.selectbox("Have you ever participated in organizing an event or project?", ["Yes, many times","Yes, once or twice","No, but I'd like to learn"]) # None0 / Once4 / Many10
-            sponsor_connections = st.selectbox("Do you have connections that could help find sponsors?", ["Yes","Maybe","No"]) # Yes10 / Maybe5 / No0
-            sponsor_public_speaking = st.selectbox("Are you comfortable speaking or presenting in front of others?", ["Yes, confidently","Sometimes","Not really, but I’d like to get better","No, I prefer working behind the scenes"]) # No0 / Not really2 / Sometimes5 / Yes
-            sponsor_represent_club = st.selectbox("Are you interested in representing the club externally (meetings, sponsors, events)?", ["Yes, definitely","Maybe","Not really"]) # Yes8 / Maybe4 / No0
-            sponsor_comm_rate = st.slider("Rate your confidence in communication & negotiation",0,5,3) # 12 / 24 / 36 / 49 / 512
+            sponsor_areas = st.multiselect("**💡 Which type of activities interest you?**", ["Searching for sponsors","Writing emails","Negotiation & Partnerships","Marketing and promotion","Communication and network","Other"]) # 1	Activities of interest	Multiple choice	8 pts per selected (max 5)	40
+            sponsor_exp = st.multiselect("**Do you have prior experience in any of these?**", ["Contacting or negotiating with sponsors","Writing partnership proposals", "Managing event logistics (venue, materials, setup…)", "Communicating with partners or companies", "Handling budgets or sponsorship funds", "None"]) # 2ptc per choice (max 5) , if none = o
+            sponsor_event_participation = st.selectbox("**Have you ever participated in organizing an event or project?**", ["Yes, many times","Yes, once or twice","No, but I'd like to learn"]) # None0 / Once4 / Many10
+            sponsor_connections = st.selectbox("**Do you have connections that could help find sponsors?**", ["Yes","Maybe","No"]) # Yes10 / Maybe5 / No0
+            sponsor_public_speaking = st.selectbox("**Are you comfortable speaking or presenting in front of others?**", ["Yes, confidently","Sometimes","Not really, but I’d like to get better","No, I prefer working behind the scenes"]) # No0 / Not really2 / Sometimes5 / Yes
+            sponsor_represent_club = st.selectbox("**Are you interested in representing the club externally (meetings, sponsors, events)?**", ["Yes, definitely","Maybe","Not really"]) # Yes8 / Maybe4 / No0
+            sponsor_comm_rate = st.slider("**Rate your confidence in communication & negotiation**",0,5,3) # 12 / 24 / 36 / 49 / 512
 
             st.markdown("---")
             st.subheader("Motivation & Availability")
-            why_join = st.text_area("Why do you want to join the club? *")
-            what_learn = st.text_area("What do you hope to learn or achieve this year *")
-            other_club = st.selectbox("Have you been part of other clubs?", ["No","Yes"])
-            leadership = st.selectbox("Would you like to take leadership responsibilities in the future? ", ["Yes, I’m interested","Maybe later","Not for now"])
-            challenge = st.text_area("Describe one challenge you faced and how you overcame it while working with a team.")
-            manage_time = st.text_input("How do you manage your time between studies and other activities?")
-            communication_skills = st.slider("Rate your communication skills (0–5)",0,5,3)
+            why_join = st.text_area("**Why do you want to join the club? * **")
+            what_learn = st.text_area("**What do you hope to learn or achieve this year * **")
+            other_club = st.selectbox("**Have you been part of other clubs?**", ["No","Yes"])
+            leadership = st.selectbox("**Would you like to take leadership responsibilities in the future?**", ["Yes, I’m interested","Maybe later","Not for now"])
+            challenge = st.text_area("**Describe one challenge you faced and how you overcame it while working with a team.**")
+            manage_time = st.text_input("**How do you manage your time between studies and other activities?**")
+            communication_skills = st.slider("**Rate your communication skills (0–5)**",0,5,3)
 
-            public_speaking = st.text_input("How comfortable are you with public speaking or presenting ideas?") 
-            Anything_toadd = st.text_area("Anything else you’d like us to know?")
+            public_speaking = st.text_input("**How comfortable are you with public speaking or presenting ideas?**") 
+            Anything_toadd = st.text_area("**Anything else you’d like us to know?**")
 
             submitted = st.form_submit_button("✅ Submit My Application")
 
