@@ -188,22 +188,22 @@ def get_gspread_client():
     client = gspread.authorize(creds)
     return client
 
-def open_sheet(sheet_id: str):
+def open_sheet():
     """
     Open a sheet by its ID and return the first worksheet.
     """
     client = get_gspread_client()
-    try:
-        sheet = client.open_by_key(sheet_id).sheet1
-        return sheet
-    except Exception as e:
-        st.error("Could not connect to Google Sheets — check credentials and SHEET_ID.")
-        st.exception(e)
-        st.stop()
+    return client.open_by_key(SHEET_ID).sheet1
 
-#sheet = open_sheet(SHEET_ID)
+try:
+    sheet = open_sheet()
+except Exception as e:
+    st.error("Could not connect to Google Sheets — check credentials and SHEET_ID.")
+    st.exception(e)
+    st.stop()
+
 # ensure header row exists and matches canonical headers
-def ensure_headers(sheet): # sheet=open_sheet(SHEET_ID)
+def ensure_headers(sheet):
     try:
         current = sheet.row_values(1)
         if current[:len(CANONICAL_HEADERS)] != CANONICAL_HEADERS:
@@ -211,7 +211,7 @@ def ensure_headers(sheet): # sheet=open_sheet(SHEET_ID)
     except Exception as e:
         st.warning(f"Could not ensure headers: {e}")
 
-ensure_headers()
+ensure_headers(sheet)
 
 # Append with retry
 def append_row_with_retry(sheet, row, retries=3, backoff=0.4): # sheet,
