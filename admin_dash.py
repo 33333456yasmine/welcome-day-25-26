@@ -108,7 +108,7 @@ review_sheet = open_reviews_sheet(SHEET_ID_Reviews)
 # ------------------------------
 # ADMIN LOGIN
 # ------------------------------
-ADMIN_PASSWORD = st.secrets.get("admin_password", "admin123")
+ADMIN_PASSWORD = st.secrets.get("admin_password", "abdesami3")
 
 col1, col2 = st.columns([2, 1])
 with col1:
