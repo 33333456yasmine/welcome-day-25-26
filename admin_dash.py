@@ -9,7 +9,7 @@ from google.oauth2.service_account import Credentials
 # ------------------------------
 # PAGE CONFIG & STYLES
 # ------------------------------
-st.set_page_config(page_title="ITC Club — Admin Dashboard", layout="wide", page_icon="🛠️")
+st.set_page_config(page_title="**ITC Club — Admin Dashboard**", layout="wide", page_icon="🛠️")
 st.image("IMG_20251102_204411_811.png", use_container_width=True)
 
 st.markdown("""
@@ -19,7 +19,7 @@ st.markdown("""
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: white;
+    background-attachment: fixed;       
 }
 [data-testid="stHeader"] {
     background: rgba(0,0,0,0);
@@ -28,7 +28,9 @@ section[data-testid="stSidebar"] {
     background-color: rgba(0, 0, 0, 0.4);
 }
 div[data-testid="stMetricValue"] {
-    color: #00ffcc !important;
+    color: #FF4B4B !important;
+    font-weight: 450 !important; 
+             
 }
 .dataframe tbody tr:hover {
     background-color: rgba(0, 255, 255, 0.2) !important;
@@ -38,10 +40,10 @@ div[data-testid="stMetricValue"] {
     border-radius: 10px;
 }
 .big-title {
-    font-size: 40px;
-    font-weight: 800;
+    font-size: 60px;
+    font-weight: 950;
     text-align: center;
-    color: #00ffe0;
+    color: #E40D0D;
 }
 .metric-card {
     padding: 1.5rem;
@@ -130,7 +132,18 @@ if "Total_Score" in df.columns:
 # ------------------------------
 # TABS
 # ------------------------------
-tab1, tab2, tab3 = st.tabs(["📊 Dashboard", "📋 Submissions", "📝 Review"])
+# Inject CSS to center tabs
+st.markdown(
+    """
+    <style>
+    div[data-baseweb="tab-list"] {
+        justify-content: center;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+tab1, tab2, tab3 = st.tabs(["📊 **Dashboard**", "📋 **Submissions**", "📝 **Review**"])
 
 # ------------------------------
 # 📊 DASHBOARD TAB
@@ -205,16 +218,17 @@ with tab3:
         tech_score = float(row.get("Tech_Score", 0))
         media_score = float(row.get("Media_Score", 0))
         sponsor_score = float(row.get("Sponsor_Score", 0))
-        final_score_of_domains = float(row.get("Total_Score", 0))
+        total_score = float(row.get("Total_Score", 0))
+        final_score_of_domains = total_score * 3 + 2
         domain_order = row.get("Domain_Interest_Order", "N/A")
 
         # --- Display student info summary ---
         st.markdown("### 👤 Candidate Information")
         c1, c2, c3 = st.columns(3)
-        c1.metric("💻 Tech Score", tech_score)
-        c2.metric("🎨 Media Score", media_score)
-        c3.metric("💰 Sponsor Score", sponsor_score)
-        st.metric("🧩 Final Score of Domains", final_score_of_domains)
+        c1.metric("💻 **Tech Score**", tech_score)
+        c2.metric("🎨 **Media Score**", media_score)
+        c3.metric("💰 **Sponsor Score**", sponsor_score)
+        st.metric("🧩 Final Score of Domains",  round(final_score_of_domains, 2))
         st.markdown(f"**Domain Order:** {domain_order}")
 
         st.divider()
@@ -229,15 +243,18 @@ with tab3:
         note = st.text_area("🗒️ Note / Feedback", placeholder="Write your observations here...")
         motivation_score = st.slider("🔥 Motivation Score", 0, 100, 10)
         skills_score = st.slider("🧠 Skills Score", 0, 100, 10)
-        date_now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
-        computed_total = round(((final_score_of_domains + skills_score) / 2) * 0.6 + (motivation_score * 0.4), 2)
+        
+        computed_total = final_score_of_domains # Default value
+        
+        if st.button("### Calculate Final Total Score"):
+            computed_total = round(((final_score_of_domains + skills_score) / 2) * 0.6 + (motivation_score * 0.4), 2)
 
         st.markdown("### 📈 Evaluation Summary")
         col1, col2, col3 = st.columns(3)
-        col1.metric("🎯 Domain Avg", final_score_of_domains)
-        col2.metric("💪 Motivation", motivation_score)
-        col3.metric("✅ Final Total", computed_total)
+        col1.metric("🎯 **Domain Avg**", round(final_score_of_domains, 2))
+        col2.metric("💪 **Motivation**", motivation_score)
+        col3.metric("✅ **Final Total**", round(computed_total, 2))
 
         if st.button("💾 Save Review"):
             try:
@@ -253,7 +270,8 @@ with tab3:
                         "Motivation_Score", "Skills_Score", "Computed_Total",
                         "Note", "Date"
                     ])
-
+                
+                date_now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 review_data = [
                     admin_name, candidate, tech_score, media_score, sponsor_score,
                     domain_order, final_score_of_domains, motivation_score, skills_score,
